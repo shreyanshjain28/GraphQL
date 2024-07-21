@@ -31,13 +31,46 @@ const resolvers = {
                 return db.games.find((game) => game.id === args.id)
             }
         },
+
         // Game object for nested query having a resolver  --- same as type defined 
-        //parent -- it is the reference to the  value returend by the previous resolver i.e - game() 
+        //parent -- it is the reference to the  value returend by the previous resolver i.e - game()
+
         Game: {
             reviews(parent){
                 return db.reviews.filter((rev) => rev.game_id === parent.id)
             }
+        },
+
+        Mutation: {
+            deleteGame(_,args){
+                db.games = db.games.filter((game) => game.id !== args.id)
+
+                return db.games
+            },
+
+            addGame(_, args){
+                let game = {
+                    ...args.game,
+                    id: Math.floor(Math.random() * 10000).toString()
+                }
+
+                db.games.push(game)
+                return db.games
+            },
+
+            updateGame(i_,args ){
+                db.games  = db.games.map((g) => {
+                    if(g.id === args.id) {
+                        return {...g, ...args.edits}
+                    }
+                    return g
+                })
+
+                return db.games.find((g) => g.id === args.id)
+            } 
         }
+
+
 }
 
 const server = new ApolloServer({

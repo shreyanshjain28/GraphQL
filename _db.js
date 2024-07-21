@@ -1,6 +1,6 @@
 let games = [
-    {id: '1' , title: 'red dead', platform: ['Steam','PS']},
-    {id: '2' , title: 'Spiderman 2', platform: ['Steam','PS','X-BOX']},
+    {id: '1' , title: 'red dead', Platform: ['Steam','PS']},
+    {id: '2' , title: 'Spiderman 2', Platform: ['Steam','PS','X-BOX']},
 ]
 
 let authors = [

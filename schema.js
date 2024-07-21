@@ -32,11 +32,31 @@ export const typeDefs = `#graphql
         authors: [Author]
     }
 
+    type Mutation {
+        deleteGame(id: ID!): [Game]
+        addGame(game: AddGameInput!): [Game]
+        updateGame(id: ID!, edits: editsGameInput! ): Game
+    }
+
+
+    input AddGameInput {
+        title: String!,
+        Platform: [String!]!
+       
+    }
+
+    input editsGameInput {
+        title: String,
+        Platform: [String!]
+       
+    }
+    
 `
 //query - important - to define entry point and return type ( if one - means single entry point and then they can explore more from there )   
 
 
-
+//input - we create a special input type to accept arguments as parameters. which can be used in mutation as single parameters
 
 //! - required ,not null 
 // data types - int/ float / string / boolean / ID
+//[String!] - array should not be empty
